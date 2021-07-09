@@ -1,0 +1,72 @@
+<h1 class="text-center" >Coachs</h1>
+<alert class="bg-info theme-color w-75 rounded mb-2" ><strong>Nos cours sont disponibles durant le confinement ❤️ ! C'est le moment de se remettre en forme 💪 et de stimuler son immunité 🍎🍋🥝 pour détruire le COVID-19 🔥</strong> </alert>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="col-6 col-sm-4 col-md mb-3 mb-xl-0 text-right">
+      <button type="button" class="btn btn-primary"><i class="cil-plus"[routerLink]="['/editCoach']"></i>&nbsp;Ajouter Coach</button>
+    </div>
+    <br>
+
+
+<table class="table table-responsive-sm table-hover table-outline mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th class="text-center"><i class="icon-people"></i></th>
+        <th>Coach</th>
+        <th class="text-center">Specialite</th>
+        <th class="text-center">Formation et Experience</th>
+        <th class="text-center">Activité</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+     
+      <tr *ngFor="let c of coachs">
+        <td class="text-center">
+          <div class="avatar">
+            <img src="assets/img/avatars/'+{{c.nom}}+'.jpg" class="img-avatar" >
+            <span class="avatar-status badge-success"></span>
+          </div>
+        </td>
+
+        <td>
+          <div>{{c.nom}} {{c.prenom}}</div>
+          <div class="small text-muted">
+            <span>{{c.email}}</span>
+          </div>
+        </td>
+       
+
+        <td class="text-center">
+          <div > {{c.specialite}}</div>
+        </td>
+
+
+        <td class="text-center">
+         <div>{{c.formation}} {{c.experience}}</div>
+        </td>
+
+
+        <td class="text-center">
+          <strong>{{c.activite}}</strong>
+        </td>
+
+
+        <td class="text-center">         
+            <button class="btn btn-success"><i class="fa fa-pencil"[routerLink]="['/editCoach/'+c.id]"></i></button>
+            <button class="btn  btn-warning"><i class="fa fa-eye" [routerLink]="['/viewCoach/'+c.id]"></i></button>
+            <button class="btn  btn-danger"><i class="fa fa-trash" [routerLink]="['/deleteCoach/'+c.id]"></i></button>
+          </td>
+        
+      </tr>
+    
+    </tbody>
+
+  </table>
+
+

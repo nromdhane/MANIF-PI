@@ -10,6 +10,21 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }
   },
+
+
+  {
+    name: 'Coachs',
+    url: '/coachs',
+    icon: 'cil-weightlifitng'
+  },
+
+  {
+    name: 'Specialites',
+    url: '/specialite',
+    icon: 'fa fa-trophy'
+  },
+
+
   {
     title: true,
     name: 'Theme'
@@ -19,6 +34,7 @@ export const navItems: INavData[] = [
     url: '/theme/colors',
     icon: 'icon-drop'
   },
+
   {
     name: 'Typography',
     url: '/theme/typography',
