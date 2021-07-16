@@ -1,6 +1,33 @@
 <div class="">
   <div class="page-header card">
     <div class="card-block">
+      <div id="styleSelector" [ngClass]="configOpenRightBar">
+        <div class="selector-toggle">
+          <a href="javascript:" placement="left" ngbTooltip="Posez une question à nos Coachs" (click)="toggleRightbar()"></a>
+        </div>
+        <ul>
+          <li>
+            <p class="selector-title main-title st-main-title">Nos Coachs</p><span class="text-muted">Nos coachs sont à votre disposition pour établir avec vous un programme personnalisé et renouvelable, adapté à vos objectifs.
+              Une question, un conseil ? Nos coachs sont là pour vous répondre et vous guider.
+              </span></li>
+    
+
+        </ul>
+    <br>
+    <br>
+    <br>
+        <ul>
+          <li>
+            <a [routerLink]="['/questions']" target="_blank" class="btn btn-success btn-block m-r-15 m-t-10 m-b-10">Posez une question</a>
+            <a [routerLink]="['/conseilCoach']" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Les conseils de nos Coachs</a>
+          </li>
+          <li class="text-center">
+            <span class="text-center f-18 m-t-15 m-b-15 d-block">« Votre corps peut presque tout faire, c'est votre tête qui a besoin d'en être convaincue »</span>
+            <a href="https://www.facebook.com/codedthemes" target="_blank" class="btn btn-facebook soc-icon m-b-20"><i class="fa fa-facebook"></i></a>
+            <a href="https://instagram.com/" target="_blank" class="btn btn-instagram soc-icon m-l-20 m-b-20"><i class="fa fa-instagram"></i></a>
+          </li>
+        </ul>
+      </div>
       <span>
         <h5 class="m-b-10"> <strong>Coachs</strong> </h5>
       </span>

@@ -7,6 +7,8 @@ import {AuthComponent} from './layout/auth/auth.component';
 import { NutritionnisteComponent } from './theme/nutritionniste/nutritionniste.component';
 import { CoachComponent } from './coach/coach.component';
 import { SpecialiteComponent } from './specialite/specialite.component';
+import { QuestionComponent } from './question/question.component';
+import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'nutritionnistes',
         component: NutritionnisteComponent
+      },
+      {
+        path: 'conseilCoach',
+        component: ConseilCoachComponent
+      },
+      {
+        path: 'questions',
+        component: QuestionComponent
       },
       {
         path: 'abonnements',

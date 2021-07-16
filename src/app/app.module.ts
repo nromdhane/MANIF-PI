@@ -2,7 +2,7 @@ import { NewInstanceModule } from './theme/new-instance/new-instance.module';
 import { ToastyModule } from 'ng2-toasty';
 import { SchedulesModule } from './theme/schedules/schedules.module';
 import { InstanceService } from './services/instance.service';
-// import { AuthInterceptor } from './auth/auth.interceptor';
+//import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { DataTableModule } from './theme/table/data-table/data-table.module';
@@ -35,6 +35,8 @@ import { NutritionnisteComponent } from './theme/nutritionniste/nutritionniste.c
 import { AbonnementComponent } from './abonnement/abonnement.component';
 import { CoachComponent } from './coach/coach.component';
 import { SpecialiteComponent } from './specialite/specialite.component';
+import { QuestionComponent } from './question/question.component';
+import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
 
 // import { httpInterceptorProviders } from './auth/auth-interceptor';
 
@@ -47,7 +49,9 @@ import { SpecialiteComponent } from './specialite/specialite.component';
     NutritionnisteComponent,
     AbonnementComponent,
     CoachComponent,
-    SpecialiteComponent
+    SpecialiteComponent,
+    QuestionComponent,
+    ConseilCoachComponent
   ],
   imports: [
     BrowserModule,

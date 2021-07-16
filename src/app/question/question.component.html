@@ -1,0 +1,64 @@
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong> Veuillez remplir ce formulaire pour poser cotre question</strong> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-lg">
+        <form #ajouterQuestionForm="ngForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                              <div class="form-group row">
+                                <label for="nomA" class="col-sm-2 col-form-label col-form-label-sm">Votre Nom</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control form-control-sm" id="nomA" placeholder="Votre Nom">
+                                </div>
+                              </div>
+                            </tr>
+                            <hr>
+                            <tr>
+                              <div class="form-group row">
+                                <label for="prenomA" class="col-sm-3 col-form-label col-form-label-sm">Votre Prénom</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" id="prenomA" placeholder="Votre Prénom">
+                                </div>
+                              </div>
+                            </tr>
+                            <hr>
+                            <tr>  
+                              <div class="form-group row">
+                                <label for="question" class="col-sm-3 col-form-label col-form-label-sm">Votre Question</label>
+                                <div class="col-sm-9">
+                                  <input type="textarea" class="form-control form-control-sm" id="question" placeholder="Votre Question">
+                                </div>
+                              </div>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- end of table col-md-12 -->
+
+                </div>
+               
+              </div>
+              <!-- end of edit info -->
+            </div>
+            <!-- end of col-lg-12 -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal"   [disabled]="ajouterQuestionForm.invalid" (click)="ajouterQuestion(ajouterQuestionForm)" >Envoyer </button>
+      </div>
+    </div>
+

@@ -15,7 +15,7 @@ export class CoachComponent implements OnInit {
   @ViewChild('dataTable') table: { nativeElement: any };
   dataTable: any;
   coachs;
-  
+  public configOpenRightBar: string;
   
   constructor(private chRef: ChangeDetectorRef, private toastyService: ToastyService,
     private toastyConfig: ToastyConfig, private router: Router,) { }
@@ -111,5 +111,10 @@ export class CoachComponent implements OnInit {
   editCoach(form :NgForm){
     this.addToast('Votre Coach a été modifié avec succes ', '', 'success');
 
+  }
+
+  
+  toggleRightbar() {
+    this.configOpenRightBar = this.configOpenRightBar === 'open' ? '' : 'open';
   }
 }
