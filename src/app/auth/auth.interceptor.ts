@@ -1,4 +1,4 @@
-import { UserService } from './../services/user.service';
+/*import { UserService } from './../services/user.service';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpUserEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -33,3 +33,4 @@ export class AuthInterceptor implements HttpInterceptor {
 
   }
 }
+*/
