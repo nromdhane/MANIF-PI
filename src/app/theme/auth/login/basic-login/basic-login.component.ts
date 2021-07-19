@@ -43,13 +43,14 @@ onSignIn(form: NgForm) {
 
   this.loginInfo = new AuthLoginInfo(this.loginForm.get('email').value, this.loginForm.get('password').value);
   this.authService.signIn(this.loginInfo).subscribe((data: any) => {
+    console.log(data);
 localStorage.setItem('userToken', data.token);
 localStorage.setItem('email', this.loginForm.get('email').value);
 // set role in user service
 this.userService.getUserInformation().subscribe(user =>  {
   this.userService.setAdmin(user.roles[0] === 'ROLE_ADMIN');
 });
-this.router.navigate(['/instances']);
+this.router.navigate(['/nutritionnistes']);
 this.isLoginFailed = false;
 
     },

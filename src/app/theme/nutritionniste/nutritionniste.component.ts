@@ -43,7 +43,10 @@ export class NutritionnisteComponent implements OnInit {
 
   ngOnInit() {
     this.nutritionnistes = [];
+    this.getAllNutritionnistes();
+  }
 
+  getAllNutritionnistes() {
     this.nutritionnisteService.getNutritionnistes().subscribe(data => {
       console.log((Object.values(data)[3]));
       this.nutritionnistes = (Object.values(data)[3]);
@@ -53,11 +56,9 @@ export class NutritionnisteComponent implements OnInit {
       this.dataTable = table.DataTable();
       $('.dataTables_length').addClass('bs-select');
     },
-      error => { console.log('failed'); });
+      error => { console.log('failed'+ error); });
 
   }
-
-
 
   openSuccessCancelSwal(i) {
     console.log(i);
@@ -76,6 +77,7 @@ export class NutritionnisteComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.nutritionnisteService.removeNutritionniste(this.nutritionnistes[i].id).subscribe(data => {
+          this.getAllNutritionnistes();
           console.log(data);
           /* const found = this.nutritionnistes.find(function(element) {
              return element.id === this.nutritionnistes[i].id;
@@ -140,8 +142,10 @@ export class NutritionnisteComponent implements OnInit {
     tel = (form.value['tel']).toString();
     console.log(nom + prenom + email + disponibilite + tel);
     this.nutritionnisteService.addNutritionniste(nom, prenom, disponibilite, email, salleDeSport, tel).subscribe(data => {
+      this.getAllNutritionnistes();
       console.log(data);
       this.addToast('Votre nouveau nutritionniste a été ajouté avec succes ', '', 'success');
+      this.ngOnInit();
 
     }, error => console.log(error));
 
@@ -154,9 +158,9 @@ export class NutritionnisteComponent implements OnInit {
     const tel = form.value['tel'];
     console.log(id + 'iiiiiidddd');
     this.nutritionnisteService.editNutritionniste(email, disponibilite, tel, this.nutritionnistes[i].id).subscribe(data => {
+      this.getAllNutritionnistes();
       console.log(data);
       this.addToast('Votre  nutritionniste a été modifié avec succes ', '', 'success');
-      this.chRef.detectChanges();
     }
       , error => {
         console.log(error);

@@ -16,7 +16,7 @@ export class AuthService {
   test: any;
 
 
-private loginUrl = 'http://localhost/pfe/public/api/login_check';
+private loginUrl = 'http://localhost:8000/api/login_check';
 constructor(private http: HttpClient) {
 
 

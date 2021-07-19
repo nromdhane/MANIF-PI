@@ -1,8 +1,7 @@
 import { NewInstanceModule } from './theme/new-instance/new-instance.module';
 import { ToastyModule } from 'ng2-toasty';
 import { SchedulesModule } from './theme/schedules/schedules.module';
-import { InstanceService } from './services/instance.service';
-//import { AuthInterceptor } from './auth/auth.interceptor';
+import { InstanceService } from './services/instance.service';import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { DataTableModule } from './theme/table/data-table/data-table.module';
@@ -80,11 +79,11 @@ import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [MenuItems, AuthService, SignUpService, InstanceService, AuthGuard
-    /*, {
+    , {
     provide : HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }*/
+  }
 ],
   bootstrap: [AppComponent],
   exports : [FormsModule],

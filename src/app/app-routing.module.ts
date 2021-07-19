@@ -1,4 +1,4 @@
-//import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AbonnementComponent } from './abonnement/abonnement.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
     children: [
      {
         path: '',
-        redirectTo: 'projects',
+        redirectTo: 'auth/simple/login',
         pathMatch: 'full'
       },
       {
@@ -44,10 +44,9 @@ const routes: Routes = [
         path: 'specialites',
         component: SpecialiteComponent
       },
-      
       {
       path: '',
-      loadChildren: './theme/instance/instance.module#InstanceModule'
+      component: NutritionnisteComponent
       },
       {
         path: 'dashboard',
@@ -106,9 +105,9 @@ const routes: Routes = [
         loadChildren: './theme/user-profile/user-profile.module#UserProfileModule'
       }
     ],
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
     },
-  /* {
+   {
       path: '',
       component: AuthComponent,
       children: [
@@ -117,7 +116,7 @@ const routes: Routes = [
           loadChildren: './theme/auth/auth.module#AuthModule'
         }
       ]
-    },*/
+    },
 
 ];
 
