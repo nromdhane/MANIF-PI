@@ -38,8 +38,14 @@
                               <div class="form-group row">
                                 <label for="nomA" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control form-control-sm" id="nomS" placeholder="Nom">
+                                  <input type="text" name="nom" ngModel #nom="ngModel" required class="form-control form-control-sm" id="nomS" placeholder="Nom">
                                 </div>
+                              </div>
+                              <div *ngIf= "nom.invalid &&(nom.touched  ||nom.dirty) && nom.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                               </div>
                             </tr>
                             <hr>
@@ -47,8 +53,14 @@
                               <div class="form-group row">
                                 <label for="TypeS" class="col-sm-3 col-form-label col-form-label-sm">Type</label>
                                 <div class="col-sm-9">
-                                  <input type="text" class="form-control form-control-sm" id="TypeS" placeholder="Type">
+                                  <input type="text" name="type" ngModel #type="ngModel" required class="form-control form-control-sm" id="TypeS" placeholder="Type">
                                 </div>
+                              </div>
+                              <div *ngIf= "type.invalid &&(type.touched  ||type.dirty) && type.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                               </div>
                             </tr>
                             <hr>
@@ -56,8 +68,14 @@
                               <div class="form-group row">
                                 <label for="CoachS" class="col-sm-2 col-form-label col-form-label-sm">Coach</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control form-control-sm" id="coachS" placeholder="Coach">
+                                  <input type="text" name="coach" ngModel #coach="ngModel" required class="form-control form-control-sm" id="coachS" placeholder="Coach">
                               </div>
+                            </div>
+                            <div *ngIf= "coach.invalid &&(coach.touched  ||coach.dirty) && coach.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ceci est un champ obligatoire !</strong>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                             </div>
                           </tr>
                         </tbody>
@@ -76,7 +94,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary"  data-dismiss="modal"   [disabled]="ajouterSecialiteForm.invalid" (click)="ajouterSpecialite(ajouterSecialiteForm)" >Envoyer </button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal"   [disabled]="ajouterSecialiteForm.invalid" (click)="ajouterSpecialite(ajouterSecialiteForm,i)" >Envoyer </button>
       </div>
     </div>
   </div>
@@ -148,7 +166,7 @@
                                     <div class="form-group row">
                                     <label for="nomS" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
                                     <div class="col-sm-10">
-                                      <input type="text" [ngModel]=s.nom name="nom" disabled class="form-control form-control-sm" id="nomS"  >
+                                      <input type="text" disabled [ngModel]=s.nom name="nom" disabled class="form-control form-control-sm" id="nomS"  >
                                     </div>
                                   </div>
                                 </tr>
@@ -166,7 +184,7 @@
                                   <div class="form-group row">
                                     <label for="coachS" class="col-sm-2 col-form-label col-form-label-sm">Coach</label>
                                     <div class="col-sm-10">
-                                      <input type="text"  [ngModel]=s.coach name="coach" class="form-control form-control-sm" id="coachS" >
+                                      <input type="text" disabled [ngModel]=s.coach name="coach" class="form-control form-control-sm" id="coachS" >
                                     </div>
                                   </div>
                                 </tr>
@@ -188,7 +206,7 @@
             </div>
             <div class="app-modal-footer">
               <button type="button" class="btn btn-light waves-effect" (click)="modalLarge.hide()">Fermer</button>
-              <button type="button" class="btn btn-primary waves-effect waves-light "[disabled]="editNutForm.invalid" (click)="editSpecialite(editNutForm)">Sauvegarder</button>
+              <button type="button" class="btn btn-primary waves-effect waves-light "[disabled]="editNutForm.invalid" (click)="editSpecialite(editNutForm,i)">Sauvegarder</button>
             </div>
           </app-modal-basic>
         </td>
