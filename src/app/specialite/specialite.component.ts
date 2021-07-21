@@ -69,6 +69,7 @@ export class SpecialiteComponent implements OnInit {
            });
            const index = this.coachs.indexOf(found);*/
           swal('Supprimé!', 'Votre specialite a été supprimé(e).', 'success');
+          this.ngOnInit();
           // this.coachs.splice(index, 1);
 
         }, error => console.error());
@@ -124,6 +125,7 @@ export class SpecialiteComponent implements OnInit {
     this.specialiteService.addSpecialite(nom, type, coach).subscribe(data => {
       console.log(data);
       this.addToast('Votre nouvelle specialite a été ajouté avec succes ', '', 'success');
+      this.ngOnInit();
 
     }, error => console.log(error));
   }
@@ -137,7 +139,8 @@ export class SpecialiteComponent implements OnInit {
     this.specialiteService.editSpecialite(type, this.specialites[i].id).subscribe(data => {
       console.log(data);
       this.addToast('Votre specialite a été modifié avec succes ', '', 'success');
-      this.chRef.detectChanges();
+      this.ngOnInit();
+    
     }
       , error => {
         console.log(error);

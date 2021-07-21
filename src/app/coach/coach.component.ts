@@ -32,16 +32,21 @@ export class CoachComponent implements OnInit {
 
   ngOnInit() {
     this.coachs = [];
-    this.coachService.getCoachs().subscribe(data => {
-      console.log((Object.values(data)[3]));
-      this.coachs = (Object.values(data)[3]);
+    this.getAllCoachs();
+  }
+
+getAllCoachs() {
+  this.coachService.getCoachs().subscribe(data => {
+    console.log((Object.values(data)[3]));
+    this.coachs = (Object.values(data)[3]);
     this.chRef.detectChanges();
     //  jQuery DataTables :
     const table: any = $('#dtBasicExample');
     this.dataTable = table.DataTable();
     $('.dataTables_length').addClass('bs-select');
   },
-  error => { console.log('failed'); });
+    error => { console.log('failed'+ error); });
+
 }
 
 
@@ -69,6 +74,7 @@ export class CoachComponent implements OnInit {
            const index = this.coachs.indexOf(found);*/
           swal('Supprimé!', 'Votre coach a été supprimé(e).', 'success');
           // this.coachs.splice(index, 1);
+          this.ngOnInit();
 
         }, error => console.error());
 
@@ -129,9 +135,11 @@ export class CoachComponent implements OnInit {
     this.coachService.addCoach(nom, prenom, disponibilite, email,specialite, activite).subscribe(data => {
       console.log(data);
       this.addToast('Votre nouveau coach a été ajouté avec succes ', '', 'success');
+      this.ngOnInit();
 
     }, error => console.log(error));
   }
+
   editCoach(form :NgForm,i){
     console.log(i);
     const id = this.coachs[i].id;
@@ -139,9 +147,10 @@ export class CoachComponent implements OnInit {
     const disponibilite = form.value['disponibilite'];
     console.log(id + 'iiiiiidddd');
     this.coachService.editCoach(email, disponibilite, this.coachs[i].id).subscribe(data => {
+      this.getAllCoachs();
       console.log(data);
       this.addToast('Votre  coach a été modifié avec succes ', '', 'success');
-      this.chRef.detectChanges();
+  
     }
       , error => {
         console.log(error);
