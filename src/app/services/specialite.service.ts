@@ -8,7 +8,7 @@ import { Specialite } from '../model/specialite';
 })
 export class SpecialiteService {
 
-  private specialitesUrl = 'http://127.0.0.1:8000/api/specialites?page=1';
+  private specialitesUrl = 'http://127.0.0.1:8000/api/specialites?page=1'; ​
   private addSpecialiteUrl = 'http://127.0.0.1:8000/api/specialites';
    private editSpecialiteUrl = 'http://127.0.0.1:8000/api/specialites/';
 

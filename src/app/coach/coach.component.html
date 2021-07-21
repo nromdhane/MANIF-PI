@@ -19,7 +19,7 @@
         <ul>
           <li>
             <a [routerLink]="['/questions']" target="_blank" class="btn btn-success btn-block m-r-15 m-t-10 m-b-10">Posez une question</a>
-            <a [routerLink]="['/conseils']" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Les conseils de nos Coachs</a>
+            <a [routerLink]="['/conseilCoach']" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Les conseils de nos Coachs</a>
           </li>
           <li class="text-center">
             <span class="text-center f-18 m-t-15 m-b-15 d-block">« Votre corps peut presque tout faire, c'est votre tête qui a besoin d'en être convaincue »</span>
@@ -194,9 +194,9 @@
         <th style="width:5%"><strong>Nom</strong></th>
         <th style="width:25%"><strong>Prénom</strong></th>
         <th style="width:20%"><strong>Email</strong></th>
-        <th style="width:20%"><strong>Disponibilité</strong></th>
-        <th style="width:25%"><strong>Specialite</strong></th>
-        <th style="width: 25px;"><strong>Activite </strong></th>
+        <!-- <th style="width:20%"><strong>Disponibilité</strong></th> -->
+        <!-- <th style="width:25%"><strong>Specialite</strong></th> -->
+        <!-- <th style="width: 25px;"><strong>Activite </strong></th> -->
 
         <th style="width:25%"><strong>Actions </strong></th>
 
@@ -220,14 +220,14 @@
 
         <td>{{c.prenom}}</td>
         <td>{{c.email}}</td>
-        <td>
+        <!-- <td>
           <button (click)="openMyModal('effect-8')"  class="btn btn-md btn-info waves-effect " placement="top"
             ngbTooltip={{c.disponibilite}}>
             <i class="fa fa-clock-o fa-lg"></i> </button>
-        </td>
-        <td>{{c.specialite}}</td>
+        </td> -->
+        <!-- <td>{{c.specialite}}</td> -->
       
-        <td>{{c.activite}}</td>
+        <!-- <td>{{c.activite}}</td> -->
         <td align="center">
           <button (click)="openSuccessCancelSwal(i)" class="btn btn-md  btn-danger btn-danger">
             <i class="fa fa-trash fa-lg"></i>

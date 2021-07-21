@@ -150,4 +150,9 @@ export class CoachComponent implements OnInit {
       });
 
   }
+
+  toggleRightbar() {
+    this.configOpenRightBar = this.configOpenRightBar === 'open' ? '' : 'open';
+  }
+
 }

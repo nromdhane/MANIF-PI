@@ -7,9 +7,9 @@ import { Coach } from '../model/coach';
   providedIn: 'root'
 })
 export class CoachService {
-  private coachsUrl = 'http://127.0.0.1:8000/api/coachs?page=1';
-  private addCoachUrl = 'http://127.0.0.1:8000/api/coachs';
-   private editCoachUrl = 'http://127.0.0.1:8000/api/coachs/';
+  private coachsUrl = 'http://127.0.0.1:8000/api/coaches?page=1';
+  private addCoachUrl = 'http://127.0.0.1:8000/api/coaches';
+   private editCoachUrl = 'http://127.0.0.1:8000/api/coaches/';
 
    constructor(private http: HttpClient, private router: Router) { }
    getCoachs() {
@@ -29,7 +29,7 @@ export class CoachService {
    }
    editCoach(email, disponibilite, id) {
      console.log('id from service' + id);
-     const editCoachUrl = 'http://127.0.0.1:8000/api/coachs/' + id;
+     const editCoachUrl = 'http://127.0.0.1:8000/api/coaches/' + id;
  
      return this.http.put(editCoachUrl, {
        'email': email,
@@ -40,7 +40,7 @@ export class CoachService {
  
    }
    removeCoach(id) {
-     const editCoachUrl = 'http://127.0.0.1:8000/api/coachs/' + id;
+     const editCoachUrl = 'http://127.0.0.1:8000/api/coaches/' + id;
  
      return this.http.delete(editCoachUrl);
    }
