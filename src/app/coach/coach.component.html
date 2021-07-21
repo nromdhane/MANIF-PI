@@ -19,7 +19,7 @@
         <ul>
           <li>
             <a [routerLink]="['/questions']" target="_blank" class="btn btn-success btn-block m-r-15 m-t-10 m-b-10">Posez une question</a>
-            <a [routerLink]="['/conseilCoach']" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Les conseils de nos Coachs</a>
+            <a [routerLink]="['/conseils']" target="_blank" class="btn btn-primary btn-block m-r-15 m-t-5 m-b-10">Les conseils de nos Coachs</a>
           </li>
           <li class="text-center">
             <span class="text-center f-18 m-t-15 m-b-15 d-block">« Votre corps peut presque tout faire, c'est votre tête qui a besoin d'en être convaincue »</span>
@@ -65,8 +65,14 @@
                               <div class="form-group row">
                                 <label for="nomA" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control form-control-sm" id="nomA" placeholder="Nom">
+                                  <input type="text" name="nom" ngModel #nom="ngModel" required class="form-control form-control-sm" id="nomA" placeholder="Nom">
                                 </div>
+                              </div>
+                              <div *ngIf= "nom.invalid &&(nom.touched  ||nom.dirty) && nom.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                               </div>
                             </tr>
                             <hr>
@@ -74,8 +80,14 @@
                               <div class="form-group row">
                                 <label for="prenomA" class="col-sm-3 col-form-label col-form-label-sm">Prénom</label>
                                 <div class="col-sm-9">
-                                  <input type="text" class="form-control form-control-sm" id="prenomA" placeholder="Prénom">
+                                  <input type="text" #prenom="ngModel" name="prenom" ngModel required class="form-control form-control-sm" id="prenomA" placeholder="Prénom">
                                 </div>
+                              </div>
+                              <div *ngIf= "prenom.invalid &&(prenom.touched  ||prenom.dirty) && prenom.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                               </div>
                             </tr>
                             <hr>
@@ -83,9 +95,21 @@
                               <div class="form-group row">
                                 <label for="emailA" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                                 <div class="col-sm-10">
-                                  <input type="email" class="form-control form-control-sm" id="emailA" placeholder="email">
+                                  <input type="email" [pattern]=re #email="ngModel"  name="email"  email="true" ngModel required class="form-control form-control-sm" id="emailA" placeholder="email">
                                 </div>
                               </div>
+                              <div *ngIf= "email.invalid && (email.touched || email.dirty) && email.errors.required "  class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div *ngIf= "email.invalid && (email.touched || email.dirty) && email.errors.pattern "  class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong>Merci de saisir un contenu valide de l'email !</strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  </div>
                             </tr>
                           </tbody>
                         </table>
@@ -109,8 +133,14 @@
                               <div class="form-group row">
                                 <label for="specialiteC" class="col-sm-4 col-form-label col-form-label-sm">Specialite</label>
                                 <div class="col-sm-8">
-                                  <input type="text" class="form-control form-control-sm" id="specialiteC" placeholder="Specialite">
+                                  <input type="text" ngModel name="specialite" required #specialite="ngModel" class="form-control form-control-sm" id="specialiteC" placeholder="Specialite">
                                 </div>
+                              </div>
+                              <div *ngIf= "specialite.invalid &&(specialite.touched  ||specialite.dirty) && specialite.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
                               </div>
                             </tr>
                             <hr>
@@ -118,8 +148,14 @@
                               <div class="form-group row">
                                 <label for="telA" class="col-sm-2 col-form-label col-form-label-sm">Activite</label>
                                 <div class="col-sm-10">
-                                  <input type="number" class="form-control form-control-sm" id="telA" placeholder="Activite">
+                                  <input type="text" ngModel name="activite" required #activite="ngModel" class="form-control form-control-sm" id="telA" placeholder="Activite">
                               </div>
+                            </div>
+                            <div *ngIf= "activite.invalid &&(activite.touched  ||activite.dirty) && activite.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <strong>Ceci est un champ obligatoire !</strong>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                             </div>
                           </tr>
                         </tbody>
@@ -220,7 +256,7 @@
                                     <div class="form-group row">
                                     <label for="nomC" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
                                     <div class="col-sm-10">
-                                      <input type="text" [ngModel]=c.nom name="nom" disabled class="form-control form-control-sm" id="nomC"  >
+                                      <input type="text"  [ngModel]=c.nom name="nom" disabled class="form-control form-control-sm" id="nomC"  >
                                     </div>
                                   </div>
                                 </tr>
@@ -238,9 +274,15 @@
                                   <div class="form-group row">
                                     <label for="emailC" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-sm-10">
-                                      <input type="email"  [ngModel]=c.email name="email" class="form-control form-control-sm" id="emailC" >
+                                      <input type="email" [pattern]=re #email="ngModel" email="true" ngModel required [ngModel]=c.email name="email" class="form-control form-control-sm" id="emailC" >
                                     </div>
                                   </div>
+                                  <div *ngIf= "email.invalid && (email.touched || email.dirty) && email.errors.required "  class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Ceci est un champ obligatoire !</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
                                 </tr>
                               </tbody>
                             </table>
@@ -264,18 +306,20 @@
                                   <div class="form-group row">
                                     <label for="specialiteC" class="col-sm-4 col-form-label col-form-label-sm">Specialite</label>
                                     <div class="col-sm-8">
-                                      <input type="text"   name="specialite"  [ngModel]=c.specialite  class="form-control form-control-sm" id="specialiteC">
+                                      <input type="text" disabled ngModel required #specialite="ngModel"  name="specialite"  [ngModel]=c.specialite  class="form-control form-control-sm" id="specialiteC">
                                     </div>
                                   </div>
+                               
                                 </tr>
                                 <hr>
                                 <tr>  
                                   <div class="form-group row">
                                     <label for=" activiteC" class="col-sm-2 col-form-label col-form-label-sm">Activite</label>
                                     <div class="col-sm-10">
-                                      <input type="text"  [ngModel]=c.activite name="activite" class="form-control form-control-sm" id="activiteC" >
+                                      <input type="text" disabled ngModel name="activite" required #activite="ngModel"  [ngModel]=c.activite name="activite" class="form-control form-control-sm" id="activiteC" >
                                     </div>
                                   </div>
+                                 
                                 </tr>
                               </tbody>
                             </table>
@@ -293,7 +337,7 @@
             </div>
             <div class="app-modal-footer">
               <button type="button" class="btn btn-light waves-effect" (click)="modalLarge.hide()">Fermer</button>
-              <button type="button" class="btn btn-primary waves-effect waves-light "[disabled]="coachs.invalid" (click)="editCoach(editCoachForm)">Sauvegarder</button>
+              <button type="button" class="btn btn-primary waves-effect waves-light "[disabled]="coachs.invalid" (click)="editCoach(editCoachForm,i)">Sauvegarder</button>
             </div>
           </app-modal-basic>
         </td>

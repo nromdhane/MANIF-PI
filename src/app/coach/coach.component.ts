@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
 import swal from 'sweetalert2';
+import { CoachService } from 'src/app/services/coach.service';
+import { Subject } from 'rxjs';
 
 declare var $;
 
@@ -15,34 +17,33 @@ export class CoachComponent implements OnInit {
   @ViewChild('dataTable') table: { nativeElement: any };
   dataTable: any;
   coachs;
+  re = /^[^\s@]+@[^\s@]+$/;
   public configOpenRightBar: string;
   
   constructor(private chRef: ChangeDetectorRef, private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig, private router: Router,) { }
+    private toastyConfig: ToastyConfig, private router: Router,  private coachService: CoachService) {  this.toastyConfig.theme = 'bootstrap';
+
+    (<any>$('#dtBasicExample')).DataTable({
+      destroy: true,
+      searching: true,
+      paging: true,
+      ordering: true
+    });}
 
   ngOnInit() {
     this.coachs = [];
-    this.coachs = this.getCoachs();
+    this.coachService.getCoachs().subscribe(data => {
+      console.log((Object.values(data)[3]));
+      this.coachs = (Object.values(data)[3]);
     this.chRef.detectChanges();
     //  jQuery DataTables :
     const table: any = $('#dtBasicExample');
     this.dataTable = table.DataTable();
     $('.dataTables_length').addClass('bs-select');
-  }
-  getCoachs() {
-    return [{
-      'id': '1', 'nom':
-        'Lengliz', 'prenom': 'Ibtissem', 'email': 'ilengliz@vermeg.com', 'specialite': 'california gym', 'disponibilite': 'from 8 to 10', 'activite': '99339231'
-    },
-    {
-      'id': '2', 'nom':
-        'Nour', 'prenom': 'ahlem', 'email': 'ilengliz@vermeg.com', 'specialite': 'MK', 'disponibilite': 'from 8 to 10', 'activite': '123456'
-    },
-    {
-      'id': '3', 'nom':
-        'Nour', 'prenom': 'ahlem', 'email': 'ilengliz@vermeg.com', 'specialite': 'Snap gym', 'disponibilite': 'from 8 to 10', 'activite': '99339231'
-    }];
-  }
+  },
+  error => { console.log('failed'); });
+}
+
 
   openSuccessCancelSwal(i) {
     console.log(i);
@@ -60,8 +61,16 @@ export class CoachComponent implements OnInit {
       cancelButtonClass: 'btn btn-danger mr-sm'
     }).then(result => {
       if (result.value) {
-        swal('Supprimé!', 'Votre Coach a été supprimé(e).', 'success');
-        this.addToast('Starting VM instance in progress', '', 'success');
+        this.coachService.removeCoach(this.coachs[i].id).subscribe(data => {
+          console.log(data);
+          /* const found = this.coachs.find(function(element) {
+             return element.id === this.coachs[i].id;
+           });
+           const index = this.coachs.indexOf(found);*/
+          swal('Supprimé!', 'Votre coach a été supprimé(e).', 'success');
+          // this.coachs.splice(index, 1);
+
+        }, error => console.error());
 
       } else if (result.dismiss) {
         swal('Annulé', 'Votre Coach est securisé(e) :)', 'error');
@@ -105,16 +114,40 @@ export class CoachComponent implements OnInit {
 
 
   ajouterCoach(form: NgForm) {
-    this.addToast('Votre nouveau Coach a été ajouté avec succes ', '', 'success');
+   
+    const nom = form.value['nom'];
+    const prenom = form.value['prenom'];
+    const email = form.value['email'];
+    const disponibilite = form.value['disponibilite'];
+      // const specilaite = form.value['specialite'];
+      const specialite = [];
+    // const activite = form.value['activite'];
+    const activite = [];
 
+    
+    console.log(nom + prenom + email + disponibilite);
+    this.coachService.addCoach(nom, prenom, disponibilite, email,specialite, activite).subscribe(data => {
+      console.log(data);
+      this.addToast('Votre nouveau coach a été ajouté avec succes ', '', 'success');
+
+    }, error => console.log(error));
   }
-  editCoach(form :NgForm){
-    this.addToast('Votre Coach a été modifié avec succes ', '', 'success');
+  editCoach(form :NgForm,i){
+    console.log(i);
+    const id = this.coachs[i].id;
+    const email = form.value['email'];
+    const disponibilite = form.value['disponibilite'];
+    console.log(id + 'iiiiiidddd');
+    this.coachService.editCoach(email, disponibilite, this.coachs[i].id).subscribe(data => {
+      console.log(data);
+      this.addToast('Votre  coach a été modifié avec succes ', '', 'success');
+      this.chRef.detectChanges();
+    }
+      , error => {
+        console.log(error);
+        this.addToast('Une erreur est survenue lors de la modification', '', 'error');
 
-  }
+      });
 
-  
-  toggleRightbar() {
-    this.configOpenRightBar = this.configOpenRightBar === 'open' ? '' : 'open';
   }
 }
