@@ -63,7 +63,20 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-credit-card'
       },
-      
+      {
+        state: 'activitees',
+        short_label: 'act',
+        name: 'Activitées',
+        type: 'link',
+        icon: 'ti-credit-card'
+      },
+      {
+        state: 'salle',
+        short_label: 'sal',
+        name: 'Salles de sport',
+        type: 'link',
+        icon: 'ti-credit-card'
+      },
       {
           state: 'instances',
           short_label: 'p',
