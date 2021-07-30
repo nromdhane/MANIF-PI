@@ -82,7 +82,7 @@
                               </div>
                             </div>
 
-                            
+
                               <div *ngIf= "email.invalid && (email.touched || email.dirty) && email.errors.required "  class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Ceci est un champ obligatoire !</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -95,7 +95,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                   </div>
-                              
+
                           </tr>
                         </tbody>
                       </table>
@@ -132,7 +132,7 @@
                             <div class="form-group row">
                               <label for="telA" class="col-sm-2 col-form-label col-form-label-sm">Tél</label>
                               <div class="col-sm-10">
-                                <input type="number" required ngModel name="tel" #num="ngModel" class="form-control form-control-sm" id="telA"
+                                <input type="number" required ngModel name="num" #num="ngModel" class="form-control form-control-sm" id="telA"
                                   placeholder="Tél">
                               </div>
                             </div>
@@ -296,7 +296,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                   </div>
-                              
+
                                 </tr>
                               </tbody>
                             </table>
