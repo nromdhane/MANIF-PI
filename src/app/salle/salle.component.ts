@@ -1,8 +1,10 @@
+import { ThrowStmt } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
 import swal from 'sweetalert2';
+import { SalleService } from 'src/app/salle.service';
 
 declare var $;
 @Component({
@@ -16,14 +18,15 @@ export class SalleComponent implements OnInit {
   salle;
 
   constructor(private chRef: ChangeDetectorRef, private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig, private router: Router) {  this.toastyConfig.theme = 'bootstrap';
+    private toastyConfig: ToastyConfig, private router: Router, private salleService:SalleService) {  this.toastyConfig.theme = 'bootstrap';
 
     (<any>$('#dtBasicExample')).DataTable({
       destroy: true,
       searching: true,
       paging: true,
       ordering: true
-    });}
+    });
+  }
 
   ngOnInit() {
     this.salle = [];
@@ -36,18 +39,17 @@ export class SalleComponent implements OnInit {
     
   }
   getSalle() {
-    return [{
-      'id': '1', 'userId':
-        '2', 'id_salle_de_sport': '2', 'description': 'top', 'adresse': 'tun', 'nom': 'california gym'
+    
+    this.salleService.getSalles().subscribe(data => {
+      console.log((Object.values(data)[3]));
+      this.salle = (Object.values(data)[3]);
+      this.chRef.detectChanges();
+      //  jQuery DataTables :
+      const table: any = $('#dtBasicExample');
+      this.dataTable = table.DataTable();
+      $('.dataTables_length').addClass('bs-select');
     },
-    {
-      'id': '2', 'userId':
-        '3', 'id_salle_de_sport': '3', 'description': 'top', 'adresse': 'tun', 'nom': 'california gym'
-    },
-    {
-      'id': '3', 'userId':
-        '4', 'id_salle_de_sport': '4', 'description': 'top', 'adresse': 'tun', 'nom': 'california gym'
-    },];
+      error => { console.log('failed'+ error); }); 
   }
   openSuccessCancelSwal(i) {
     console.log(i);
@@ -111,11 +113,15 @@ export class SalleComponent implements OnInit {
 
 
   ajouterNutritionniste(form: NgForm) {
-    this.addToast('Votre nouveau nutritionniste a été ajouté avec succes ', '', 'success');
-
+    this.salle.push({
+      'id': '3', 'userId':
+        '4', 'id_salle_de_sport': '4', 'description': 'top', 'adresse': 'tun', 'nom': 'test gym'
+    })
+    this.addToast('Votre nouveau Salle de sport a été ajouté avec succes ', '', 'success');
+    console.log(this.salle)
   }
   editNutritionniste(form :NgForm){
-    this.addToast('Votre  nutritionniste a été modifié avec succes ', '', 'success');
+    this.addToast('Votre  Salle de sport a été modifié avec succes ', '', 'success');
 
   }
 }

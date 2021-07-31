@@ -12,7 +12,7 @@ export class NutritionnisteService {
   // private editNutritionnisteUrl = 'http://127.0.0.1:8000/api/nutritionnistes/';
 
 
-  
+
   constructor(private http: HttpClient, private router: Router) { }
   getNutritionnistes() {
     return this.http.get<any>(this.nutritionnistesUrl);
@@ -36,7 +36,7 @@ export class NutritionnisteService {
     return this.http.put(editNutritionnisteUrl, {
       'email': email,
       'disponibilite': disponibilite,
-      'tel': tel,
+      'tel': tel.toString(),
 
     });
 
