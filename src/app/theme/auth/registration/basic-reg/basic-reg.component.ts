@@ -4,6 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { SignUpService } from 'src/app/services/sign-up.service';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MembreService } from 'src/app/services/membre.service';
+import { Membre } from 'src/app/model/membre';
+import { Utilisateur } from 'src/app/model/utilisateur';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
 
 
 @Component({
@@ -22,27 +26,32 @@ profilePicture = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADhCAMAAADm
 
 classDanger = false;
 validatingForm: FormGroup;
-
-  constructor(private signUpService: SignUpService, private router: Router)  {
+membre:Membre;
+user:Utilisateur;
+constructor(private membreservice: MembreService, private router: Router,
+  private utilasateurService:UtilisateurService)  {
 
    }
   ngOnInit() {
+    // this.membre=new Membre();
+    // this.user=new Utilisateur();
     const firstName = new FormControl('', Validators.required);
-    const lastName = new FormControl('', Validators.required);
-    const jobPost = new FormControl('', Validators.required);
-    const mobileNumber = new FormControl('', Validators.required);
+    const taille = new FormControl('', Validators.required);
+    const poids = new FormControl('', Validators.required);
+    const dateDeNaissance = new FormControl('', Validators.required);
     const customFile = new FormControl('');
     const email = new FormControl('', [Validators.required]);
     const recaptcha = new FormControl(null, Validators.required);
-
+    const password = new FormControl(null, Validators.required);
     this.validatingForm = new FormGroup({
       firstName,
-      lastName,
-      jobPost,
-      mobileNumber,
+      taille,
       customFile,
+      dateDeNaissance,
       email,
-      recaptcha
+      recaptcha,
+      password,
+      poids
     });
     console.log(this.validatingForm);
   }
@@ -62,16 +71,51 @@ onFileSelected(event) {
   this.getBase64(this.file).then(data => this.profilePicture = data as string);
 }
 
-
-
-  onSignUp(form: NgForm) {
-    this.signUpService.signUp (this.validatingForm.get('firstName').value, this.validatingForm.get('lastName').value,
-    this.validatingForm.get('email').value + '@tritux.com' , '', this.validatingForm.get('jobPost').value,
-     this.validatingForm.get('mobileNumber').value, this.profilePicture, ''
-  ).subscribe(data => { console.log(data);
+ajouterUtilisateur(form: NgForm) {
+  let tel = '';
+  console.log(form);
+  const email = form.value['email'];
+  const roles = [
+    "ROLE_USER"
+];
+  const password = form.value['password'];
+  const lattitide = 55;
+  const longitude = 66;
+  const reset_token = form.value['reset_token'];
+  const nom=form.value['firstName'];
+  const poids=form.value['poids'];
+  const taille=form.value['taille'];
+  const dateDeNaissance=form.value['dateDeNaissance'];
+  console.log(email + roles + password + lattitide + longitude + reset_token);
+  this.utilasateurService.addUtilisateur(email, roles, password,lattitide,longitude,reset_token).subscribe(data => {
+    console.log(data);
+    console.log(data["@id"].split("/")[3]);
+    this.membreservice.addMembre(dateDeNaissance,poids,taille,nom).subscribe(data => { console.log(data);
     this.passSent = true ;
     this.router.navigate(['/auth/login/simple']);
   }, error => { this.passSent = false ; });
-  }
+   // this.addToast('Votre nouveau utilisateur a été ajouté avec succes ', '', 'success');
+
+  }, error => console.log(error));
+
+}
+
+
+  onSignUp(form: NgForm) {
+    this.utilasateurService.addUtilisateur(this.validatingForm.get('email').value, [
+      "ROLE_USER"
+  ],this.validatingForm.get('password').value,3,5,123).subscribe(
+      data=>{
+        console.log("data user",data)
+      }
+    )
+    this.membreservice.addMembre(this.validatingForm.get('firstName').value,
+    this.validatingForm.get('email').value, this.validatingForm.get('password').value,
+     this.validatingForm.get('mobileNumber') 
+  ).subscribe(data => { console.log(data);
+    this.passSent = true ;
+   // this.router.navigate(['/auth/login/simple']);
+  }, error => { this.passSent = false ; });
+} 
 
 }

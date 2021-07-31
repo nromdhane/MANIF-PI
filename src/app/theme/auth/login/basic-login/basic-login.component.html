@@ -14,30 +14,30 @@
                 <div class="row m-b-20">
 
                   <div class="col-md-12">
-                    <h3 class="text-left txt-primary">Sign In</h3>
+                    <h3 class="text-left txt-primary">S'identifier</h3>
                   </div>
                 </div>
                 <div *ngIf='isLoginFailed' class="alert alert-danger icons-alert">
                     <button type="button" class="close" appRemoveAlert>
                       <i class="icofont icofont-close-line-circled"></i>
                     </button>
-                    <p><strong>Something Went Wrong !</strong> </p>
-                    <p>Please try again</p>
+                    <p><strong>Quelque chose s'est mal passé !</strong> </p>
+                    <p>Veuillez réessayer</p>
                   </div>
                   <hr/>
                 <div class="col-md-16">
-                  <input type="email" class="form-control" [ngClass]="{'is-invalid': loginForm.get('email').invalid && loginForm.get('email').touched}" placeholder="Your Email Address"  formControlName="email" name="email" required><br>
-                  <span class="md-line text-danger" *ngIf="loginForm.get('email').invalid && loginForm.get('email').value !== '' && loginForm.get('email').touched"> Invalid email</span>
+                  <input type="email" class="form-control" [ngClass]="{'is-invalid': loginForm.get('email').invalid && loginForm.get('email').touched}" placeholder="Votre adresse e-mail"  formControlName="email" name="email" required><br>
+                  <span class="md-line text-danger" *ngIf="loginForm.get('email').invalid && loginForm.get('email').value !== '' && loginForm.get('email').touched"> Email invalide</span>
 
                 </div>
                 <div class="col-md-16">
-                  <input type="password" class="form-control" required   [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}" formControlName="password" name="password"  placeholder="Choose Password">
+                  <input type="password" class="form-control" required   [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}" formControlName="password" name="password"  placeholder="Choisissez un mot de passe">
                   <span class="md-line"></span>
                 </div>
                 <div class="row  text-left">
                   <div class="col-12">
                     <div class="forgot-phone text-right f-right">
-                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600 text-inverse"> Forgot Password?</a>
+                      <a [routerLink]="['/auth/forgot']" class="text-right f-w-600 text-inverse">Mot de passe oublié?</a>
                     </div>
                   </div>
                 </div>
@@ -58,9 +58,9 @@
                 <hr/>
                 <div class="row">
                   <div class="col-md-10">
-                    <p class="text-inverse text-left m-b-0">Don't have an account ?</p>
-                    <p class="text-inverse text-left"><b>Please Sign Up
-                 <i>   <a [routerLink]="['/auth/registration/simple']" class="text-right f-w-600 text-inverse"> here</a></i>
+                    <p class="text-inverse text-left m-b-0">Vous n'avez pas de compte ?</p>
+                    <p class="text-inverse text-left"><b>Vous-êtes Membre?Inscrivez vous s'il vous plait
+                 <i>   <a [routerLink]="['/auth/registration/simple']" class="text-right f-w-600 text-inverse">Membre</a></i>
                   </b> </p>
                   </div>
                 </div>

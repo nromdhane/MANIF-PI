@@ -64,6 +64,22 @@ const MENUITEMS = [
         icon: 'ti-credit-card'
       },
       {
+
+        state: 'utilisateurs',
+        short_label: 'n',
+        name: 'Utilisateurs',
+        type: 'link',
+        icon: 'ti-bag'
+      },
+      {
+        state: 'membres',
+        short_label: 'n',
+        name: 'Membres',
+        type: 'link',
+        icon: 'ti-bag'
+      },
+      
+
         state: 'activitees',
         short_label: 'act',
         name: 'Activitées',
@@ -77,6 +93,7 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-credit-card'
       },
+
       {
           state: 'instances',
           short_label: 'p',

@@ -12,6 +12,8 @@ import { NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/Project';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { MembreService } from 'src/app/services/membre.service';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -58,8 +60,9 @@ export class UserProfileComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
   jobpost: string;
+  Nom;
   firstname: string;
-  lastname: string;
+  userconnect: any;
   profilePic: string;
   gender: string;
   phoneNum: string;
@@ -69,7 +72,9 @@ file = null;
 
 email = localStorage.getItem('email');
   qrcode: string;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+    private utilisateurserv:UtilisateurService,
+    private memberservice:MembreService) {
     this.fetchContactData(data => {
       this.rowsContact = data;
       setTimeout(() => {
@@ -79,12 +84,22 @@ email = localStorage.getItem('email');
   }
 
   ngOnInit() {
-    this.userService.getUserInformation().subscribe(
+    console.log( localStorage);
+    this.utilisateurserv.getUtilisateurs().subscribe(e=>{
+      console.log("uti service",e);
+      e["hydra:member"].forEach(element => {
+        if(element.email==localStorage.getItem('email')){
+          this.userconnect=element
+        }
+      });
+        
+      
+    })
+    this.memberservice.getMembres().subscribe(
       data => {
         console.log(data);
         this.jobpost = data.jobpost;
-        this.firstname = data.firstname;
-        this.lastname = data.lastname;
+        this.Nom = data.nom;
         this.profilePic = data.profilPic;
         this.src =  this.profilePic;
         this.projects = data.projects;
