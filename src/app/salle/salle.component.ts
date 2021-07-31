@@ -1,37 +1,24 @@
+import { ThrowStmt } from '@angular/compiler';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import swal from 'sweetalert2';
-import {
-  ToastData,
-  ToastOptions,
-  ToastyService,
-  ToastyConfig
-} from 'ng2-toasty';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NutritionnisteService } from 'src/app/services/nutritionniste.service';
-import { Subject } from 'rxjs';
+import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
+import swal from 'sweetalert2';
+import { SalleService } from 'src/app/salle.service';
 
 declare var $;
-
 @Component({
-  selector: 'app-nutritionniste',
-  templateUrl: './nutritionniste.component.html',
-  styleUrls: ['./nutritionniste.component.scss']
+  selector: 'app-salle',
+  templateUrl: './salle.component.html',
+  styleUrls: ['./salle.component.scss']
 })
-export class NutritionnisteComponent implements OnInit {
+export class SalleComponent implements OnInit {
   @ViewChild('dataTable') table: { nativeElement: any };
   dataTable: any;
-  nutritionnistes;
-  re = /^[^\s@]+@[^\s@]+$/;
-
-
+  salle;
 
   constructor(private chRef: ChangeDetectorRef, private toastyService: ToastyService,
-    private toastyConfig: ToastyConfig, private router: Router, private nutritionnisteService: NutritionnisteService
-
-
-  ) {
-    this.toastyConfig.theme = 'bootstrap';
+    private toastyConfig: ToastyConfig, private router: Router, private salleService:SalleService) {  this.toastyConfig.theme = 'bootstrap';
 
     (<any>$('#dtBasicExample')).DataTable({
       destroy: true,
@@ -42,29 +29,34 @@ export class NutritionnisteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.nutritionnistes = [];
-    this.getAllNutritionnistes();
+    this.salle = [];
+    this.salle = this.getSalle();
+    this.chRef.detectChanges();
+    //  jQuery DataTables :
+    const table: any = $('#dtBasicExample');
+    this.dataTable = table.DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    
   }
-
-  getAllNutritionnistes() {
-    this.nutritionnisteService.getNutritionnistes().subscribe(data => {
+  getSalle() {
+    
+    this.salleService.getSalles().subscribe(data => {
       console.log((Object.values(data)[3]));
-      this.nutritionnistes = (Object.values(data)[3]);
+      this.salle = (Object.values(data)[3]);
       this.chRef.detectChanges();
       //  jQuery DataTables :
       const table: any = $('#dtBasicExample');
       this.dataTable = table.DataTable();
       $('.dataTables_length').addClass('bs-select');
     },
-      error => { console.log('failed'+ error); });
-
+      error => { console.log('failed'+ error); }); 
   }
-
   openSuccessCancelSwal(i) {
-    console.log(i);
+    
+   
     swal({
       title:
-        '  Êtes-vous sûr de vouloir supprimer le collaborateur   ' + this.nutritionnistes[i].prenom + ' ' + this.nutritionnistes[i].nom + ' ?',
+        '  Êtes-vous sûr de vouloir supprimer le collaborateur   ' + this.salle[i].nom + ' ?',
       text: 'Cette action ne peut pas être annulée !!',
       type: 'warning',
       showCancelButton: true,
@@ -76,25 +68,19 @@ export class NutritionnisteComponent implements OnInit {
       cancelButtonClass: 'btn btn-danger mr-sm'
     }).then(result => {
       if (result.value) {
-        this.nutritionnisteService.removeNutritionniste(this.nutritionnistes[i].id).subscribe(data => {
-          this.getAllNutritionnistes();
+        this.salleService.removeSalle(this.salle[i].id).subscribe(data => {
+          console.log(this.salle[1].id);
           console.log(data);
-          /* const found = this.nutritionnistes.find(function(element) {
-             return element.id === this.nutritionnistes[i].id;
-           });
-           const index = this.nutritionnistes.indexOf(found);*/
-          swal('Supprimé!', 'Votre collaborateur a été supprimé(e).', 'success');
-          // this.nutritionnistes.splice(index, 1);
+          swal('Supprimé!', 'Votre Salle de sport a été supprimé(e).', 'success');
+          this.ngOnInit();
 
         }, error => console.error());
 
-
       } else if (result.dismiss) {
-        swal('Annulé', 'Votre collaborateur est securisé(e) :)', 'error');
+        swal('Annulé', 'Votre Salle de sport est securisé(e) :)', 'error');
       }
     });
   }
-
 
   addToast(title, message, type) {
     console.log('adding toast');
@@ -112,6 +98,7 @@ export class NutritionnisteComponent implements OnInit {
         console.log('Toast ' + toast.id + ' has been removed!');
       }
     };
+
     switch (type) {
       case 'default': this.toastyService.default(toastOptions); break;
       case 'info': this.toastyService.info(toastOptions); break;
@@ -130,33 +117,34 @@ export class NutritionnisteComponent implements OnInit {
   }
 
 
-  ajouterNutritionniste(form: NgForm) {
-    let tel = '';
+  ajouterSalle(form: NgForm) {
     const nom = form.value['nom'];
-    const prenom = form.value['prenom'];
-    const email = form.value['email'];
-    const disponibilite = form.value['disponibilite'];
-    // const salleDeSport = form.value['salleDeSport'];
-    const salleDeSport = [];
-
-    tel = (form.value['tel']).toString();
-    console.log(nom + prenom + email + disponibilite + tel);
-    this.nutritionnisteService.addNutritionniste(nom, prenom, disponibilite, email, salleDeSport, tel).subscribe(data => {
-      this.getAllNutritionnistes();
+    const description = form.value['description'];
+      // const specilaite = form.value['specialite'];
+      //const specialite = [];
+    // const activite = form.value['activite'];
+    //const activite = [];
+    
+    
+    
+    this.salleService.addSalle(nom, description).subscribe(data => {
       console.log(data);
-      this.addToast('Votre nouveau nutritionniste a été ajouté avec succes ', '', 'success');
+      this.addToast('Votre nouveau coach a été ajouté avec succes ', '', 'success');
       this.ngOnInit();
 
     }, error => console.log(error));
-
   }
-  editNutritionniste(form: NgForm, i) {
-    const email = form.value['email'];
-    const disponibilite = form.value['disponibilite'];
-    const tel = form.value['num'];
-    this.nutritionnisteService.editNutritionniste(email, disponibilite, tel, this.nutritionnistes[i].id).subscribe(data => {
-      this.getAllNutritionnistes();
-      this.addToast('Votre  nutritionniste a été modifié avec succes ', '', 'success');
+  editSalle(form :NgForm,i){
+    console.log(i);
+    const id = this.salle[i].id;
+    const nom = form.value['nom'];
+    const description = form.value['description'];
+    console.log(id + 'iiiiiidddd');
+    this.salleService.editSalle(nom, description, this.salle[i].id).subscribe(data => {
+      this.getSalle();
+      console.log(data);
+      this.addToast('Votre  salle de sport a été modifié avec succes ', '', 'success');
+  
     }
       , error => {
         console.log(error);
@@ -167,5 +155,3 @@ export class NutritionnisteComponent implements OnInit {
   }
 
 }
-
-

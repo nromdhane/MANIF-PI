@@ -22,7 +22,7 @@
             <i class="ti-menu"></i>
           </a>
           <a [routerLink]="['/dashboard/default/']">
-            <img class="img-fluid float:left"style ="width:121px" src="assets/images/logo.png" alt="" />
+            <img class="img-fluid float:left"style ="width:170px" src="assets/images/logo.png" alt="" />
           </a>
           <a href="javascript:" class="mobile-options" (click)="toggleHeaderNavRight()">
             <i class="ti-more"></i>
@@ -194,13 +194,16 @@
 
 -->
 
-                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites'|| asideItem.state=='utilisateurs'|| asideItem.state=='membres')" appAccordionLink group="{{asideItem.state}}">
+
+                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites' || asideItem.state=='utilisateurs'|| asideItem.state=='membres' || asideItem.state=='conseilCoach'||asideItem.state=='activitees'|| asideItem.state=='salle')" appAccordionLink group="{{asideItem.state}}">
+
                     <a [routerLink]="['/', asideItem.main_state, asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle *ngIf="asideItem.main_state; else mainContent">
                       <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
                       <span class="pcoded-mtext">{{ asideItem.name }}</span>
                       <span *ngFor="let asideBadge of asideItem.badge" class="pcoded-badge label label-{{ asideBadge.type }}">{{asideBadge.value}}</span>
                       <span class="pcoded-mcaret"></span>
                     </a>
+            
                     <ng-template #mainContent>
                       <a [routerLink]="['/', asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle>
                         <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>

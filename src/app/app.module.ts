@@ -36,8 +36,13 @@ import { CoachComponent } from './coach/coach.component';
 import { SpecialiteComponent } from './specialite/specialite.component';
 import { QuestionComponent } from './question/question.component';
 import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
+
 import { MembreComponent } from './membre/membre.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+
+import { ActiviteComponent } from './activite/activite.component';
+import { SalleComponent } from './salle/salle.component';
+
 
 // import { httpInterceptorProviders } from './auth/auth-interceptor';
 
@@ -53,8 +58,13 @@ import { UtilisateurComponent } from './utilisateur/utilisateur.component';
     SpecialiteComponent,
     QuestionComponent,
     ConseilCoachComponent,
+
     MembreComponent,
     UtilisateurComponent
+
+    ActiviteComponent,
+    SalleComponent
+
   ],
   imports: [
     BrowserModule,
