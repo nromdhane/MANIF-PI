@@ -1,7 +1,8 @@
 import { NewInstanceModule } from './theme/new-instance/new-instance.module';
 import { ToastyModule } from 'ng2-toasty';
 import { SchedulesModule } from './theme/schedules/schedules.module';
-import { InstanceService } from './services/instance.service';import { AuthInterceptor } from './auth/auth.interceptor';
+import { InstanceService } from './services/instance.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth/auth.guard';
 import { DataTableModule } from './theme/table/data-table/data-table.module';
@@ -30,12 +31,17 @@ import { LoginModule } from './theme/auth/login/login.module';
 import { LogModule } from './theme/log/log.module';
 import { NewProjectModule } from './theme/new-project/new-project.module';
 import { InstanceModule } from './theme/instance/instance.module';
+import { DatePipe} from '@angular/common';
 import { NutritionnisteComponent } from './theme/nutritionniste/nutritionniste.component';
 import { AbonnementComponent } from './abonnement/abonnement.component';
 import { CoachComponent } from './coach/coach.component';
 import { SpecialiteComponent } from './specialite/specialite.component';
 import { QuestionComponent } from './question/question.component';
 import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
+import { EvenementComponent } from './theme/evenement/evenement.component';
+import { CategorieComponent } from './theme/categorie/categorie.component';
+//import { EndDateValidatorDirective } from './CustomDirectives/end-date-validator.directive';
+
 
 // import { httpInterceptorProviders } from './auth/auth-interceptor';
 
@@ -50,7 +56,10 @@ import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
     CoachComponent,
     SpecialiteComponent,
     QuestionComponent,
-    ConseilCoachComponent
+    ConseilCoachComponent,
+    EvenementComponent,
+    CategorieComponent,
+    //EndDateValidatorDirective
   ],
   imports: [
     BrowserModule,
@@ -78,7 +87,7 @@ import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
 
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [MenuItems, AuthService, SignUpService, InstanceService, AuthGuard
+  providers: [DatePipe, MenuItems, AuthService, SignUpService, InstanceService, AuthGuard
     , {
     provide : HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

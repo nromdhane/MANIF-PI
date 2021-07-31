@@ -39,14 +39,14 @@ const MENUITEMS = [
         name: 'Nutritionistes',
         type: 'link',
         icon: 'ti-bag'
-      }, 
+      },
       {
         state: 'abonnements',
         short_label: 'a',
         name: 'Abonnements',
         type: 'link',
         icon: 'ti-credit-card'
-      }, 
+      },
 
       {
         state: 'coachs',
@@ -63,7 +63,20 @@ const MENUITEMS = [
         type: 'link',
         icon: 'ti-credit-card'
       },
-      
+      {
+        state: 'categories',
+        short_label: 's',
+        name: 'Catégories',
+        type: 'link',
+        icon: 'ti-credit-card'
+      },
+      {
+        state: 'evenements',
+        short_label: 's',
+        name: 'Évènements',
+        type: 'link',
+        icon: 'ti-credit-card'
+      },
       {
           state: 'instances',
           short_label: 'p',
@@ -71,7 +84,7 @@ const MENUITEMS = [
           type: 'link',
           icon: 'ti-google'
         },
-      
+
         {
           state: 'projects',
           short_label: 'p',

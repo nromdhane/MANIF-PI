@@ -34,8 +34,10 @@
               "src/scss/style.scss",
            "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
-             "node_modules/ng2-toasty/style-material.css"
-
+             "node_modules/ng2-toasty/style-material.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/nova-light/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/chart.js/dist/Chart.js"

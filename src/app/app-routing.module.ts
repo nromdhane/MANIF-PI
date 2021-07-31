@@ -9,6 +9,8 @@ import { CoachComponent } from './coach/coach.component';
 import { SpecialiteComponent } from './specialite/specialite.component';
 import { QuestionComponent } from './question/question.component';
 import { ConseilCoachComponent } from './conseil-coach/conseil-coach.component';
+import {CategorieComponent} from './theme/categorie/categorie.component';
+import {EvenementComponent} from './theme/evenement/evenement.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,16 @@ const routes: Routes = [
       {
         path: 'specialites',
         component: SpecialiteComponent
+      },
+
+      {
+        path: 'categories',
+        component: CategorieComponent
+      },
+
+      {
+        path: 'evenements',
+        component: EvenementComponent
       },
       {
       path: '',

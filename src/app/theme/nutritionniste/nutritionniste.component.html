@@ -82,7 +82,7 @@
                               </div>
                             </div>
 
-                            
+
                               <div *ngIf= "email.invalid && (email.touched || email.dirty) && email.errors.required "  class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Ceci est un champ obligatoire !</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -95,7 +95,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                   </div>
-                              
+
                           </tr>
                         </tbody>
                       </table>
@@ -207,7 +207,6 @@
     <tbody *ngIf="nutritionnistes.length != 0">
       <tr *ngFor="let n of nutritionnistes; let i = index">
         <td>{{n.nom}}</td>
-
         <td>{{n.prenom}}</td>
         <td>{{n.email}}</td>
         <td>
@@ -296,7 +295,7 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                   </div>
-                              
+
                                 </tr>
                               </tbody>
                             </table>

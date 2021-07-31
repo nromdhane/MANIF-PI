@@ -117,7 +117,7 @@
 
 -->
 
-                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites' || asideItem.state=='conseilCoach')" appAccordionLink group="{{asideItem.state}}">
+                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites' || asideItem.state=='conseilCoach' || asideItem.state=='categories' || asideItem.state=='evenements')" appAccordionLink group="{{asideItem.state}}">
                     <a [routerLink]="['/', asideItem.main_state, asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle *ngIf="asideItem.main_state; else mainContent">
                       <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
                       <span class="pcoded-mtext">{{ asideItem.name }}</span>

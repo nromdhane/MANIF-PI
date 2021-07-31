@@ -1,0 +1,358 @@
+<div class="">
+  <div class="page-header card">
+    <div class="card-block">
+      <span>
+        <h5 class="m-b-10"> <strong>Evenements</strong> </h5>
+      </span>
+      <ul class="breadcrumb-title b-t-default p-t-10">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/dashboard/default/']"> <i class="fa fa-home"></i> </a>
+        </li>
+        <li class="breadcrumb-item">
+          <a [routerLink]="">Evenements</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong> Veuillez remplir les informations de votre nouveau évènement</strong> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-lg">
+        <form #ajouterNutritionnisteForm="ngForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="general-info">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                              <div class="form-group row">
+                                <label for="titreT" class="col-sm-3 col-form-label col-form-label-sm">Titre</label>
+                                <div class="col-sm-10">
+                                  <input type="text"  name="titre" ngModel #titre="ngModel" required class="form-control form-control-sm" id="titreT" placeholder="Titre">
+                                </div>
+                              </div>
+                              <div *ngIf= "titre.invalid && (titre.touched || titre.dirty) && titre.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                            </tr>
+                          <hr>
+                          <tr>
+                              <div class="form-group row">
+                                <label for="Desc" class="col-sm-3 col-form-label col-form-label-sm">Description</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="description" ngModel #description="ngModel" required class="form-control form-control-sm" id="Desc" placeholder="Description">
+                                </div>
+                                <div *ngIf= "description.invalid && description.touched && description.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong>Ceci est un champ obligatoire !</strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </tr>
+                          <hr>
+                          <tr>
+                              <!--col-sm-2 col-form-label col-form-label-sm"-->
+                              <div class="col-md-12 col-form-label col-form-label-sm">
+                              <div class="form-group">
+                                <!--<label for="DateD" class="col-sm-3 col-form-label col-form-label-sm">Date Début</label>
+                                <div _ngcontent-c8="" class="col-md-4 col-xl-9 m-b-30"><input _ngcontent-c8="" class="form-control" type="date"></div>-->
+                                <label>Date Début:</label>
+                                <input type="date" name="date_debut" [(ngModel)]="date_debut" #date_debutRef="ngModel" ngModel   required>
+                                <div *ngIf="date_debutRef.touched && date_debutRef.hasError('required')" class="alert alert-danger alert-dismissible fade show" role="alert">Date Début est obligatoire</div>
+                              </div>
+                              </div>
+                            </tr>
+                            <tr>
+                              <div class="col-md-12 col-form-label col-form-label-sm">
+                                <div class="form-group">
+                                  <!--<label for="DateD" class="col-sm-3 col-form-label col-form-label-sm">Date Début</label>
+                                  <div _ngcontent-c8="" class="col-md-4 col-xl-9 m-b-30"><input _ngcontent-c8="" class="form-control" type="date"></div>-->
+                                  <label>Date Fin:</label>
+                                  <input type="date" name="date_fin" isLessThanStartDate="{{date_debutRef.value}}" #date_finRef="ngModel" ngModel  [(ngModel)]="date_fin" (change)="diff()">
+                                  <div *ngIf="date_finRef.touched && date_finRef.hasError('required')" class="alert alert-danger alert-dismissible fade show" role="alert">Date Fin est obligatoire</div>
+                                  <div *ngIf="duree < 0" class="alert alert-danger alert-dismissible fade show" role="alert">La date fin doit etre supérieure à la date de début</div>
+                                </div>
+                              </div>
+                            </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- end of table col-md-6 -->
+                  <div class="col-md-6">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                              <div class="form-group row">
+                                <label for="duree" class="col-sm-3 col-form-label col-form-label-sm">Nombre de jours</label>
+                                <div *ngIf="duree >= 0" class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="duree" placeholder="Durée" [(ngModel)]="duree" readonly>
+                                </div>
+                                <div  *ngIf="duree < 0" class="col-sm-9">
+                                  <input type="text" class="form-control form-control-sm" name="duree" placeholder="Durée" readonly>
+                                </div>
+                              </div>
+                            </tr>
+                          <hr>
+                          <div class="form-group row">
+                              <label for="lieuL" class="col-sm-4 col-form-label col-form-label-sm">Lieu</label>
+                              <div class="col-sm-8">
+                                <input type="text"  name="lieu" ngModel #lieu="ngModel" required class="form-control form-control-sm" id="lieu" placeholder="Lieu">
+                              </div>
+                              <div *ngIf= "titre.invalid && titre.touched && titre.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Ceci est un champ obligatoire !</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                            </div>
+                          <hr>
+                          <tr>
+                              <div class="form-group row">
+                                  <label for="categorie" class="col-sm-2 col-form-label col-form-label-sm">Catégorie</label>
+                                  <div class="col-sm-10">
+                                    <select required type="text"  name="categorie" ngModel #categorie="ngModel"  required class="form-control form-control-sm" id="Catégorie" placeholder="Catégorie">
+                                      <option *ngFor="let dl of listItems" [value]="dl">
+                                        {{dl}}
+                                      </option>
+                                    </select>
+                                </div>
+                               <!-- <div *ngIf= "categorie.invalid && categorie.touched && categorie.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong>Ceci est un champ obligatoire !</strong>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div> -->
+                              </div>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- end of table col-lg-6 -->
+                </div>
+
+              </div>
+              <!-- end of edit info -->
+            </div>
+            <!-- end of col-lg-12 -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"
+                  (click)="ajouterEvenement(ajouterevenementForm)">Envoyer </button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-card [classHeader]="true">
+  <button class="float-right  btn btn-primary waves-effect light-effect" data-toggle="modal" data-target="#exampleModal"
+    data-whatever="@getbootstrap">
+    <i class="fa fa-plus"></i>Ajouter évènement
+  </button>
+  <br />
+
+  <table   id="dtBasicExample" class="table table-striped table-bordered table-sm table-responsive" cellspacing="0"
+    width="100%">
+    <thead>
+      <tr>
+          <th style="width:5%"><strong>Titre</strong></th>
+          <th style="width:25%"><strong>Description</strong></th>
+          <th style="width:20%"><strong>Date Début</strong></th>
+          <th style="width:20%"><strong>Date Fin</strong></th>
+          <th style="width:25%"><strong>Durée</strong></th>
+          <th style="width: 25px;"><strong>Lieu </strong></th>
+          <th style="width: 25px;"><strong>Catégorie</strong></th>
+          <th style="width: 25px;"><strong>Nombre de participants</strong></th>
+          <th style="width: 25px;"><strong>Nombre maximum de participants</strong></th>
+          <th style="width: 25px;"><strong>Raison de désactivation</strong></th>
+          <th style="width:25%"><strong>Actions</strong></th>
+      </tr>
+    </thead>
+    <tbody style="margin-left: 500px" class=" text-center ">
+      <div *ngIf="evenements.length == 0" class="loader animation-start"
+        style="text-align: center; margin-left: 610px">
+        <span class="circle delay-1 size-2"></span>
+        <span class="circle delay-2 size-4"></span>
+        <span class="circle delay-3 size-6"></span>
+        <span class="circle delay-4 size-7"></span>
+        <span class="circle delay-5 size-7"></span>
+        <span class="circle delay-6 size-6"></span>
+        <span class="circle delay-7 size-4"></span>
+        <span class="circle delay-8 size-2"></span>
+      </div>
+    </tbody>
+    <tbody *ngIf="evenements.length != 0">
+      <tr *ngFor="let e of evenements; let i = index">
+          <td>{{e.titre}}</td>
+          <td>{{e.description}}</td>
+          <td>
+            <button (click)="openMyModal('effect-8')" class="btn btn-md btn-info waves-effect " placement="top"
+                    ngbTooltip={{e.dateDebut}}>
+              <i class="fa fa-clock-o fa-lg"></i> </button>
+          </td>
+          <td>
+            <button (click)="openMyModal('effect-8')"  class="btn btn-md btn-info waves-effect " placement="top"
+                    ngbTooltip={{e.dateFin}}>
+              <i class="fa fa-clock-o fa-lg"></i> </button>
+          </td>
+          <td>
+            <button (click)="openMyModal('effect-8')"  class="btn btn-md btn-info waves-effect " placement="top"
+                    ngbTooltip={{e.duree}}>
+              <i class="fa fa-clock-o fa-lg"></i> </button>
+          </td>
+          <td>{{e.lieu}}</td>
+          <td>{{e.categorie}}</td>
+          <td>{{e.nbparticipant}}</td>
+          <td>{{e.nbmaxparticipant}}</td>
+          <td>{{e.raisondesactivation	}}</td>
+          <td align="center">
+              <button (click)="openSuccessCancelSwal(i)" class="btn btn-md  btn-danger btn-danger">
+                <i class="fa fa-trash fa-lg"></i>
+              </button>
+              <button class="btn btn-md  waves-effect " (click)="modalLarge.show()" data-target="#exampleModal"
+                      style="background-color: #BA68C8;">
+                <i class="fa fa-pencil fa-lg"></i>
+              </button>
+              <app-modal-basic #modalLarge [dialogClass]="'modal-lg'">
+                <div class="app-modal-header">
+                  <h4 class="modal-title">Modifier les infos relatives à {{e.titre}}</h4>
+                  <button type="button" class="close basic-close" (click)="modalLarge.hide()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="app-modal-body">
+                  <form #editCategForm="ngForm">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="general-info">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                      <tr>
+                                          <div class="form-group row">
+                                            <label for="titre" class="col-sm-2 col-form-label col-form-label-sm">Titre</label>
+                                            <div class="col-sm-10">
+                                              <input type="text" [ngModel]=e.titre name="titre"
+                                                     class="form-control form-control-sm" id="titre">
+                                            </div>
+                                          </div>
+                                        </tr>
+                                  <hr>
+                                  <tr>
+                                      <div class="form-group row">
+                                        <label for="description"
+                                               class="col-sm-3 col-form-label col-form-label-sm">Description</label>
+                                        <div class="col-sm-9">
+                                          <input type="text" [ngModel]=e.description name="description"
+                                                 class="form-control form-control-sm" id="description">
+                                        </div>
+                                      </div>
+                                    </tr>
+                                    <tr>
+                                      <!--col-sm-2 col-form-label col-form-label-sm"-->
+                                      <div class="col-md-12 col-form-label col-form-label-sm">
+                                      <div class="form-group">
+                                        <!--<label for="DateD" class="col-sm-3 col-form-label col-form-label-sm">Date Début</label>
+                                        <div _ngcontent-c8="" class="col-md-4 col-xl-9 m-b-30"><input _ngcontent-c8="" class="form-control" type="date"></div>-->
+                                        <label>Date Début:</label>
+                                        <input type="date" name="date_debut" [(ngModel)]="date_debut" #date_debutRef="ngModel" ngModel   required>
+                                        <div *ngIf="date_debutRef.touched && date_debutRef.hasError('required')" class="alert alert-danger alert-dismissible fade show" role="alert">Date Début est obligatoire</div>
+                                      </div>
+                                      </div>
+                                    </tr>
+                                    <tr>
+                                      <div class="col-md-12 col-form-label col-form-label-sm">
+                                        <div class="form-group">
+                                          <!--<label for="DateD" class="col-sm-3 col-form-label col-form-label-sm">Date Début</label>
+                                          <div _ngcontent-c8="" class="col-md-4 col-xl-9 m-b-30"><input _ngcontent-c8="" class="form-control" type="date"></div>-->
+                                          <label>Date Fin:</label>
+                                          <input type="date" name="date_fin" isLessThanStartDate="{{date_debutRef.value}}" #date_finRef="ngModel" ngModel  [(ngModel)]="date_fin" (change)="diff()">
+                                          <div *ngIf="date_finRef.touched && date_finRef.hasError('required')" class="alert alert-danger alert-dismissible fade show" role="alert">Date Fin est obligatoire</div>
+                                          <div *ngIf="duree < 0" class="alert alert-danger alert-dismissible fade show" role="alert">La date fin doit etre supérieure à la date de début</div>
+                                        </div>
+                                      </div>
+                                    </tr>
+                                    <tr>
+                                      <div class="form-group row">
+                                        <label for="duree" class="col-sm-3 col-form-label col-form-label-sm">Nombre de jours</label>
+                                        <div *ngIf="duree >= 0" class="col-sm-9">
+                                          <input type="text" class="form-control form-control-sm" name="duree" placeholder="Durée" [(ngModel)]="duree" readonly>
+                                        </div>
+                                        <div  *ngIf="duree < 0" class="col-sm-9">
+                                          <input type="text" class="form-control form-control-sm" name="duree" placeholder="Durée" readonly>
+                                        </div>
+                                      </div>
+                                    </tr>
+                                    <tr>
+                                      <div class="form-group row">
+                                        <label for="lieuL" class="col-sm-4 col-form-label col-form-label-sm">Lieu</label>
+                                        <div class="col-sm-8">
+                                          <input type="text"  name="lieu" ngModel #lieu="ngModel" required class="form-control form-control-sm" id="lieu" placeholder="Lieu">
+                                        </div>
+                                        <div *ngIf= "titre.invalid && titre.touched && titre.errors.required"class="alert alert-danger alert-dismissible fade show" role="alert">
+                                          <strong>Ceci est un champ obligatoire !</strong>
+                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+      
+                          <!-- end of edit info -->
+                        </div>
+                        <!-- end of col-lg-12 -->
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="app-modal-footer">
+                  <button type="button" class="btn btn-light waves-effect" (click)="modalLarge.hide()">Fermer</button>
+                  <button type="button" class="btn btn-primary waves-effect waves-light " [disabled]="editCategForm.invalid"
+                          (click)="editEvenement(editCategForm,i)"  (click)="modalLarge.hide()">Sauvegarder</button>
+                </div>
+              </app-modal-basic>
+      
+          </tr>
+    </tbody>
+  </table>
+
+  <br />
+
+  <br />
+  <br />
+  <ng2-toasty></ng2-toasty>
+
+</app-card>
