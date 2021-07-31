@@ -151,15 +151,11 @@ export class NutritionnisteComponent implements OnInit {
 
   }
   editNutritionniste(form: NgForm, i) {
-    console.log(i);
-    const id = this.nutritionnistes[i].id;
     const email = form.value['email'];
     const disponibilite = form.value['disponibilite'];
-    const tel = form.value['tel'];
-    console.log(id + 'iiiiiidddd');
+    const tel = form.value['num'];
     this.nutritionnisteService.editNutritionniste(email, disponibilite, tel, this.nutritionnistes[i].id).subscribe(data => {
       this.getAllNutritionnistes();
-      console.log(data);
       this.addToast('Votre  nutritionniste a été modifié avec succes ', '', 'success');
     }
       , error => {
