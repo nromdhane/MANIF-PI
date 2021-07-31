@@ -3,5 +3,5 @@ export interface Coach {
     description: string;
     adresse: string;
  
-  }
+}
   

@@ -52,7 +52,7 @@ export class SalleComponent implements OnInit {
       error => { console.log('failed'+ error); }); 
   }
   openSuccessCancelSwal(i) {
-    console.log(i);
+    
    
     swal({
       title:
@@ -68,11 +68,16 @@ export class SalleComponent implements OnInit {
       cancelButtonClass: 'btn btn-danger mr-sm'
     }).then(result => {
       if (result.value) {
-        swal('Supprimé!', 'Votre collaborateur a été supprimé(e).', 'success');
-        this.addToast('Starting VM instance in progress', '', 'success');
+        this.salleService.removeSalle(this.salle[i].id).subscribe(data => {
+          console.log(this.salle[1].id);
+          console.log(data);
+          swal('Supprimé!', 'Votre Salle de sport a été supprimé(e).', 'success');
+          this.ngOnInit();
+
+        }, error => console.error());
 
       } else if (result.dismiss) {
-        swal('Annulé', 'Votre collaborateur est securisé(e) :)', 'error');
+        swal('Annulé', 'Votre Salle de sport est securisé(e) :)', 'error');
       }
     });
   }
@@ -112,16 +117,41 @@ export class SalleComponent implements OnInit {
   }
 
 
-  ajouterNutritionniste(form: NgForm) {
-    this.salle.push({
-      'id': '3', 'userId':
-        '4', 'id_salle_de_sport': '4', 'description': 'top', 'adresse': 'tun', 'nom': 'test gym'
-    })
-    this.addToast('Votre nouveau Salle de sport a été ajouté avec succes ', '', 'success');
-    console.log(this.salle)
+  ajouterSalle(form: NgForm) {
+    const nom = form.value['nom'];
+    const description = form.value['description'];
+      // const specilaite = form.value['specialite'];
+      //const specialite = [];
+    // const activite = form.value['activite'];
+    //const activite = [];
+    
+    
+    
+    this.salleService.addSalle(nom, description).subscribe(data => {
+      console.log(data);
+      this.addToast('Votre nouveau coach a été ajouté avec succes ', '', 'success');
+      this.ngOnInit();
+
+    }, error => console.log(error));
   }
-  editNutritionniste(form :NgForm){
-    this.addToast('Votre  Salle de sport a été modifié avec succes ', '', 'success');
+  editSalle(form :NgForm,i){
+    console.log(i);
+    const id = this.salle[i].id;
+    const nom = form.value['nom'];
+    const description = form.value['description'];
+    console.log(id + 'iiiiiidddd');
+    this.salleService.editSalle(nom, description, this.salle[i].id).subscribe(data => {
+      this.getSalle();
+      console.log(data);
+      this.addToast('Votre  salle de sport a été modifié avec succes ', '', 'success');
+  
+    }
+      , error => {
+        console.log(error);
+        this.addToast('Une erreur est survenue lors de la modification', '', 'error');
+
+      });
 
   }
+
 }

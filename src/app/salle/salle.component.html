@@ -186,67 +186,26 @@
                                     <div class="form-group row">
                                     <label for="nomA" class="col-sm-2 col-form-label col-form-label-sm">Nom</label>
                                     <div class="col-sm-10">
-                                      <input type="text" [ngModel]=a.nom name="nom" disabled class="form-control form-control-sm" id="nomA"  >
+                                      <input type="text" [ngModel]=a.nom name="nom"  class="form-control form-control-sm" id="nomA"  >
                                     </div>
                                   </div>
                                 </tr>
                                 <hr>
                                 <tr>
                                   <div class="form-group row">
-                                    <label for="prenomA" class="col-sm-3 col-form-label col-form-label-sm">Prénom</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" disabled [ngModel]=a.prenom name="prenom" class="form-control form-control-sm" id="prenomA"  >
-                                    </div>
+                                  <label for="disponibiliteA" class="col-sm-3 col-form-label col-form-label-sm">Description</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" [ngModel]=a.description name="description" class="form-control form-control-sm" id="description" >
                                   </div>
-                                </tr>
-                                <hr>
-                                <tr>  
-                                  <div class="form-group row">
-                                    <label for="emailA" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
-                                    <div class="col-sm-10">
-                                      <input type="email"  [ngModel]=a.email name="email" class="form-control form-control-sm" id="emailA" >
-                                    </div>
-                                  </div>
-                                </tr>
+                                </div>
+                              </tr>
+                               
                               </tbody>
                             </table>
                           </div>
                         </div>
                         <!-- end of table col-md-6 -->
-                        <div class="col-md-6">
-                          <div class="table-responsive">
-                            <table class="table">
-                              <tbody>
-                                <tr>
-                                    <div class="form-group row">
-                                    <label for="disponibiliteA" class="col-sm-3 col-form-label col-form-label-sm">Disponibilité</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" [ngModel]=a.disponibilite name="disponibilite" class="form-control form-control-sm" id="disponibiliteA" >
-                                    </div>
-                                  </div>
-                                </tr>
-                                <hr>
-                                <tr>
-                                  <div class="form-group row">
-                                    <label for="salleDeSportA" class="col-sm-4 col-form-label col-form-label-sm">Salle de sport</label>
-                                    <div class="col-sm-8">
-                                      <input type="text"   name="salleDeSport"  [ngModel]=a.salleDeSport disabled class="form-control form-control-sm" id="salleDeSportA">
-                                    </div>
-                                  </div>
-                                </tr>
-                                <hr>
-                                <tr>  
-                                  <div class="form-group row">
-                                    <label for="telA" class="col-sm-2 col-form-label col-form-label-sm">Tél</label>
-                                    <div class="col-sm-10">
-                                      <input type="number"  [ngModel]=a.num name="num" class="form-control form-control-sm" id="telA" >
-                                    </div>
-                                  </div>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
+                        
                         <!-- end of table col-lg-6 -->
                       </div>
                      
