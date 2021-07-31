@@ -43,13 +43,13 @@
     <div class="col-lg-12">
       <div class="md-tabs md-card-tabs">
         <ngb-tabset>
-          <ngb-tab title="Personal Info">
+          <ngb-tab title="Information Personnelle">
             <ng-template ngbTabContent>
               <div [@fadeInOutTranslate] class="m-t-15">
                 <!-- personal card start -->
                 <div class="card">
                   <div class="card-header">
-                    <h5 class="card-header-text">About Me</h5>
+                    <h5 class="card-header-text">Apropos</h5>
                     <button
                       id="edit-btn"
                       type="button"
@@ -70,12 +70,12 @@
                                   <table class="table m-0">
                                     <tbody>
                                       <tr>
-                                        <th scope="row">First Name</th>
-                                        <td>{{ firstname }}</td>
+                                        <th scope="row">Nom</th>
+                                        <td>{{ Nom }}</td>
                                       </tr>
                                       <tr>
-                                        <th scope="row">Last Name</th>
-                                        <td>{{ lastname }}</td>
+                                        <th scope="row">Date de Naissance</th>
+                                        <td>{{ date_de_naissance }}</td>
                                       </tr>
                                       <tr>
                                         <th scope="row">Email</th>
@@ -84,12 +84,12 @@
                                         </td>
                                       </tr>
                                       <tr>
-                                          <th scope="row">Mobile Number</th>
-                                          <td>{{ phoneNum }}</td>
+                                          <th scope="row">poids</th>
+                                          <td>{{ poids }}</td>
                                         </tr>
                                       <tr>
-                                        <th scope="row">Password</th>
-                                        <td>*******</td>
+                                        <th scope="row">taille</th>
+                                        <td>taille</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -102,29 +102,14 @@
                                     <tbody>
 
                                       <tr>
-                                        <th scope="row">Job Post</th>
-                                        <td>{{ jobpost }}</td>
+                                        <th scope="row">longitude</th>
+                                        <td>{{ userconnect.longitude }}</td>
                                       </tr>
                                       <tr>
-                                        <th scope="row">Projects</th>
-                                        <td>
-                                          <ul class="list-group-flush">
-                                            <li
-                                              *ngFor="let project of projects"
-                                              class="list-group-item"
-                                            >
-                                              {{ project.name }}
-                                            </li>
-                                          </ul>
-                                        </td>
+                                        <th scope="row">lattitude</th>
+                                        <td>{{ userconnect.lattitude }}</td>
                                       </tr>
-                                      <tr>
-                                        <th scope="row">Qr Information</th>
-                                       <td> <img style="height: 100px;width:100px"
-                                        src="{{qrcode}}"
-                                        >
-                                      </td>
-                                      </tr>
+                                   
                                     </tbody>
                                   </table>
                                 </div>
@@ -163,7 +148,7 @@
                                             <input
                                               type="text"
                                               class="form-control"
-                                              placeholder="First Name"
+                                              placeholder="Nom"
                                                 name="firstname"
                                              [(ngModel)]="firstname"
                                             />
@@ -175,9 +160,9 @@
                                                 ></i></label
                                             ></span>
                                             <input
-                                              type="text"
+                                              type="date"
                                               class="form-control"
-                                              placeholder="Last Name"
+                                              placeholder="Date de Naissance"
                                               [(ngModel)]="lastname"
                                               name="lastname"
                                             />
@@ -217,7 +202,7 @@
                                                 type="number"
                                                 class="form-control"
                                                 [(ngModel)]="phoneNum"
-                                                placeholder="Mobile Number"
+                                                placeholder="poids"
                                                 name="phoneNum"
                                               />
                                             </div>
@@ -246,6 +231,7 @@
                                             <input
                                               type="text"
                                               class="form-control"
+                                              placeholder="taille"
                                               [(ngModel)]="jobpost"
                                               name="jobpost"
                                               />
@@ -282,7 +268,7 @@
                                                       type="radio"
                                                       name="gender"
                                                       value="male"
-                                                    /><i class="helper"></i> Male
+                                                    /><i class="helper"></i> Masculin
                                                   </label>
                                                 </div>
                                                 <div
@@ -295,7 +281,7 @@
                                                       value="female"
                                                       checked
                                                     /><i class="helper"></i>
-                                                    Female
+                                                    Femenin
                                                   </label>
                                                 </div>
                                               </div>
@@ -346,7 +332,7 @@
             <div class="app-modal-footer">
               <button type="button" class="btn btn-default waves-effect" (click)="modalLarge.hide()">Cancel</button>
               &nbsp;
-              <button type="button" (click)="onEditPassword(editpass)" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+              <button type="button" (click)="onEditPassword(editpass)" class="btn btn-primary waves-effect waves-light ">Sauvegarder</button>
             </div>
           </app-modal-basic>
 
@@ -361,12 +347,12 @@
                               <a
                                 href="javascript:;"
                                 class="btn btn-primary waves-effect waves-light m-r-20"
-                                (click)="openPromptSwal(editUser)" >Save</a
+                                (click)="openPromptSwal(editUser)" >Sauvegarder</a
                               >
                               <a
                                 href="javascript:;"
                                 (click)="toggleEditProfile()"
-                                >Cancel</a
+                                >Annuler</a
                               >
                             </div>
                           </div>

@@ -44,7 +44,84 @@
             </li>
 
           </ul>
-          <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
+          <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right" style="
+          display: flex;
+          position: relative;
+          bottom: 94px;
+          left: 720px;
+          height: 57px;
+      ">
+            <li (clickOutside)="notificationOutsideClick('live')" class="header-notification" [ngClass]="liveNotificationClass" (click)="toggleLiveNotification()">
+              <a href="javascript:">
+                <i class="ti-bell"></i>
+                <span class="badge bg-c-pink"></span>
+              </a>
+              <ul [@notificationBottom]="liveNotification" class="show-notification">
+                <li>
+                  <h6>Notifications</h6>
+                  <label class="label label-danger">New</label>
+                </li>
+                <li>
+                  <div class="media">
+                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                    <div class="media-body">
+                      <h5 class="notification-user">John Doe</h5>
+                      <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                      <span class="notification-time">30 minutes ago</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                    <div class="media-body">
+                      <h5 class="notification-user">Joseph William</h5>
+                      <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                      <span class="notification-time">30 minutes ago</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="media">
+                    <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                    <div class="media-body">
+                      <h5 class="notification-user">Sara Soudein</h5>
+                      <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
+                      <span class="notification-time">30 minutes ago</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li class="">
+              <a href="javascript:" (click)="toggleChat()">
+                <i class="ti-comments"></i>
+                <span class="badge bg-c-green"></span>
+              </a>
+            </li>
+            <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification" [ngClass]="profileNotificationClass" (click)="toggleProfileNotification()"
+            style="display:grid">
+              <a href="javascript:">
+                <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                <span>John Doe</span>
+                <i class="ti-angle-down"></i>
+              </a>
+              <ul [@notificationBottom]="profileNotification" style="position: relative;" class="show-notification profile-notification">
+                <li>
+                  <a [routerLink]="['/user/profile/']">
+                    <i class="ti-user"></i> Profile
+                  </a>
+                </li>
+            
+                <li>
+                  <a [routerLink]="['/auth/login/simple']">
+                    <i class="ti-layout-sidebar-left"></i> Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!-- <ul [@mobileHeaderNavRight]="navRight" [ngClass]="navRight" class="nav-right">
 
 
             <li (clickOutside)="notificationOutsideClick('profile')" class="user-profile header-notification" [ngClass]="profileNotificationClass" (click)="toggleProfileNotification()">
@@ -66,7 +143,7 @@
                 </li>
               </ul>
             </li>
-          </ul>
+          </ul> -->
          </div>
       </div>
     </nav>
@@ -117,7 +194,7 @@
 
 -->
 
-                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites' || asideItem.state=='conseilCoach')" appAccordionLink group="{{asideItem.state}}">
+                  <li [routerLinkActive]="['active']" *ngIf="asideItem.type === 'link'  && (asideItem.state=='nutritionnistes' || asideItem.state=='abonnements' || asideItem.state=='coachs' || asideItem.state=='specialites'|| asideItem.state=='utilisateurs'|| asideItem.state=='membres')" appAccordionLink group="{{asideItem.state}}">
                     <a [routerLink]="['/', asideItem.main_state, asideItem.state]" target="{{asideItem.target ? '_blank' : '_self'}}" appAccordionToggle *ngIf="asideItem.main_state; else mainContent">
                       <span class="pcoded-micon"><i class="{{ asideItem.icon }}"></i><b>{{ asideItem.short_label }}</b></span>
                       <span class="pcoded-mtext">{{ asideItem.name }}</span>
